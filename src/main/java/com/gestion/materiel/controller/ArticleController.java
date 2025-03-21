@@ -6,11 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
         import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/articles")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ArticleController {
     private final ArticleService articleService;
 
@@ -44,6 +45,26 @@ public class ArticleController {
         Article updatedArticle = articleService.saveArticle(article);
         return ResponseEntity.ok(updatedArticle);
     }
+
+    @PutMapping("qte/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+        Optional<Article> optionalArticle = articleService.getArticleById(id);
+        if (!optionalArticle.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Article article = optionalArticle.get();
+
+        // Update only the 'quantite' field if present in the request
+        if (updates.containsKey("quantite")) {
+            article.setQte((Integer) updates.get("quantite"));
+
+        }
+
+        Article updatedArticle = articleService.saveArticle(article);
+        return ResponseEntity.ok(updatedArticle);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {

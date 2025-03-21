@@ -46,9 +46,15 @@ public class SecurityConfig {
                 .cors().and()  // ✅ Enable CORS
                 .csrf().disable()
                 .authorizeHttpRequests()
-            //    .requestMatchers("/auth/**").permitAll()
-             //   .requestMatchers("/admin/**","/api/**").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+
+                .requestMatchers("/api/**").authenticated()
+                .requestMatchers(
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/swagger-ui.html"
+                ).permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -66,6 +72,7 @@ public class SecurityConfig {
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         source.registerCorsConfiguration("/**", config);
+
         return new CorsFilter(source);
     }
 }

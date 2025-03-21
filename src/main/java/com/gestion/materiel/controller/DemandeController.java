@@ -1,16 +1,20 @@
 package com.gestion.materiel.controller;
 
+import com.gestion.materiel.Dto.DemandeDto;
+import com.gestion.materiel.Dto.DepartementDto;
 import com.gestion.materiel.model.Demande;
+import com.gestion.materiel.model.Departement;
 import com.gestion.materiel.service.DemandeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/demandes")
-@CrossOrigin("*") // Permettre l'accès depuis d'autres domaines
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class DemandeController {
     private final DemandeService demandeService;
 
@@ -19,9 +23,13 @@ public class DemandeController {
     }
 
     @GetMapping
-    public List<Demande> getAllDemandes() {
-        return demandeService.getAllDemandes();
+    public List<DemandeDto> getAllDemandes() {
+        List<Demande> demandes = demandeService.getAllDemandes();
+        return demandes.stream().map(DemandeDto::new).collect(Collectors.toList());
+
+
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Demande> getDemandeById(@PathVariable Long id) {

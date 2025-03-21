@@ -57,5 +57,6 @@ public class AgentServiceImpl implements AgentService, UserDetailsService {
                 .username(agent.getUsername())
                 .password(agent.getPassword())
                 .authorities("ROLE_" + agent.getRole())  // Ensure roles are prefixed with "ROLE_"
-                .build();    }
+                .build();
+    }
 }

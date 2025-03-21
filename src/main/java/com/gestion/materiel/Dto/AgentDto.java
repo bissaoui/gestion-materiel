@@ -22,16 +22,26 @@ public class AgentDto {
         this.nom = agent.getNom();
         this.cin = agent.getCIN();
         this.poste = agent.getPoste();
-        this.directionName = agent.getDirection().getLibelle();
-        this.directionId = agent.getDirection().getId();
 
-        this.serviceName = agent.getService().getLibelle();
-        this.serviceId = agent.getService().getId();
-        this.departementName = agent.getDepartement().getLibelle();
-        this.departementId = agent.getDepartement().getId();
-        this.role = String.valueOf(agent.getRole());
+        if (agent.getDirection() != null) {
+            this.directionName = agent.getDirection().getLibelle();
+            this.directionId = agent.getDirection().getId();
+        }
+
+        if (agent.getService() != null) {
+            this.serviceName = agent.getService().getLibelle();
+            this.serviceId = agent.getService().getId();
+        }
+
+        if (agent.getDepartement() != null) {
+            this.departementName = agent.getDepartement().getLibelle();
+            this.departementId = agent.getDepartement().getId();
+        }
+
+        this.role = agent.getRole() != null ? String.valueOf(agent.getRole()) : null;
         this.username = agent.getUsername();
     }
+
 
     public String getDepartementName() {
         return departementName;
@@ -56,6 +66,7 @@ public class AgentDto {
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
+
 
     public String getUsername() {
         return username;

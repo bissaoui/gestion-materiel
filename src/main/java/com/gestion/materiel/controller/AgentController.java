@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/agents")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+
 public class AgentController {
     private final AgentService agentService;
 
@@ -23,8 +25,10 @@ public class AgentController {
     }
 
     @GetMapping
-    public List<Agent> getAllAgents() {
-        return agentService.getAllAgents();
+    public List<AgentDto> getAllAgents() {
+        List<Agent> agents = agentService.getAllAgents();
+        return agents.stream().map(AgentDto::new).collect(Collectors.toList());
+
     }
 
     @GetMapping("/{id}")

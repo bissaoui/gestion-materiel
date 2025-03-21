@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ligne-demandes")
-@CrossOrigin("*") // Permettre l'accès depuis d'autres domaines
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class LigneDemandeController {
     private final LigneDemandeService ligneDemandeService;
 

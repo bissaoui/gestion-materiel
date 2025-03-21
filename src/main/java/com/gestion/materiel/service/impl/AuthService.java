@@ -40,7 +40,7 @@ public class AuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        return jwtUtil.generateToken(agent.getCIN(), String.valueOf(agent.getRole()),agent.getNom());
+        return jwtUtil.generateToken(agent.getCIN(), String.valueOf(agent.getRole()),agent.getUsername());
     }
 
 
