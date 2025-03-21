@@ -1,4 +1,4 @@
-# gestion-materiel
+# Back end gestion-materiel
 Back-End de l'Application de Gestion de Matériel
 Le back-end de l'application de gestion de matériel est développé avec Spring Boot, un framework Java robuste et flexible, permettant de gérer l'authentification, l'autorisation, la gestion des utilisateurs (agents), ainsi que la manipulation des ressources matérielles.
 
