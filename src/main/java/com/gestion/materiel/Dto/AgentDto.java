@@ -42,6 +42,21 @@ public class AgentDto {
         this.username = agent.getUsername();
     }
 
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public Long getDepartementId() {
+        return departementId;
+    }
+
+    public void setDepartementId(Long departementId) {
+        this.departementId = departementId;
+    }
 
     public String getDepartementName() {
         return departementName;
@@ -49,6 +64,14 @@ public class AgentDto {
 
     public void setDepartementName(String departementName) {
         this.departementName = departementName;
+    }
+
+    public Long getDirectionId() {
+        return directionId;
+    }
+
+    public void setDirectionId(Long directionId) {
+        this.directionId = directionId;
     }
 
     public String getDirectionName() {
@@ -59,21 +82,28 @@ public class AgentDto {
         this.directionName = directionName;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public Long getId() {
+        return id;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-
-    public String getUsername() {
-        return username;
+    public String getNom() {
+        return nom;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPoste() {
+        return poste;
+    }
+
+    public void setPoste(String poste) {
+        this.poste = poste;
     }
 
     public String getRole() {
@@ -92,51 +122,19 @@ public class AgentDto {
         this.serviceId = serviceId;
     }
 
-    public String getPoste() {
-        return poste;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setPoste(String poste) {
-        this.poste = poste;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public String getNom() {
-        return nom;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getDirectionId() {
-        return directionId;
-    }
-
-    public void setDirectionId(Long directionId) {
-        this.directionId = directionId;
-    }
-
-    public Long getDepartementId() {
-        return departementId;
-    }
-
-    public void setDepartementId(Long departementId) {
-        this.departementId = departementId;
-    }
-
-    public String getCin() {
-        return cin;
-    }
-
-    public void setCin(String cin) {
-        this.cin = cin;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

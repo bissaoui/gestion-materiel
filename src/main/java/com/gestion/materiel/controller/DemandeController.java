@@ -1,5 +1,6 @@
 package com.gestion.materiel.controller;
 
+import com.gestion.materiel.Dto.AgentDto;
 import com.gestion.materiel.Dto.DemandeDto;
 import com.gestion.materiel.Dto.DepartementDto;
 import com.gestion.materiel.model.Demande;
@@ -32,9 +33,10 @@ public class DemandeController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Demande> getDemandeById(@PathVariable Long id) {
+    public ResponseEntity<DemandeDto> getDemandeById(@PathVariable Long id) {
         Optional<Demande> demande = demandeService.getDemandeById(id);
-        return demande.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return demande.map(dep -> ResponseEntity.ok(new DemandeDto(dep)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -61,4 +63,20 @@ public class DemandeController {
         demandeService.deleteDemande(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{id}/validate")
+    public ResponseEntity<DemandeDto> validateDemande(@PathVariable Long id) {
+        Optional<Demande> demandeOptional = demandeService.getDemandeById(id);
+
+        if (!demandeOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Demande demande = demandeOptional.get();
+        demande.setValidation(true); // Mettre à jour uniquement la validation à true
+        Demande updatedDemande = demandeService.saveDemande(demande);
+
+        return demandeOptional.map(dep -> ResponseEntity.ok(new DemandeDto(dep)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 }

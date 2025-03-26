@@ -31,11 +31,15 @@ public class AgentController {
 
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<Agent> getAgentById(@PathVariable Long id) {
+    public ResponseEntity<AgentDto> getAgentById(@PathVariable Long id) {
         Optional<Agent> agent = agentService.getAgentById(id);
-        return agent.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return agent.map(dep -> ResponseEntity.ok(new AgentDto(dep)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+
     @GetMapping("/cin/{cin}")
     public ResponseEntity<AgentDto> getAgentById(@PathVariable String cin) {
         Optional<Agent> agent = agentService.findAgentByCIN(cin);

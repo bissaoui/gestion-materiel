@@ -23,4 +23,8 @@ public class Demande {
 
     @OneToMany(mappedBy = "demande", cascade = CascadeType.ALL)
     private List<LigneDemande> lignes;
+
+    @Column(nullable = false)
+    private boolean validation = false;
+
 }
