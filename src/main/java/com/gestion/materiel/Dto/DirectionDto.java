@@ -9,7 +9,7 @@ public class DirectionDto {
     private Long id;
     private String libelle;
     private String abreviation;
-    private List<Long> agentsId; // On ne garde que l'ID de la direction
+    private List<Long> agentsId;
 
     public DirectionDto(Direction direction) {
         this.id = direction.getId();

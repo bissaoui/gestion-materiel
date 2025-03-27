@@ -6,7 +6,7 @@ public class DepartementDto {
     private Long id;
     private String libelle;
     private String abreviation;
-    private Long directionId; // On ne garde que l'ID de la direction
+    private Long directionId;
 
     public DepartementDto(Departement departement) {
         this.id = departement.getId();

@@ -7,7 +7,7 @@ public class ServiceDto {
     private Long id;
     private String libelle;
     private String abreviation;
-    private Long departementId; // On ne garde que l'ID de la direction
+    private Long departementId;
     private String departementAbbreviation;
 
     public ServiceDto(Service service) {

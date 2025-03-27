@@ -7,12 +7,12 @@ public class AgentDto {
     private String nom;
     private String cin;
     private String poste;
-    private Long directionId; // On ne garde que l'ID de la direction
-    private Long departementId; // On ne garde que l'ID de la direction
-    private Long serviceId; // On ne garde que l'ID de la direction
-    private String departementName; // On ne garde que l'ID de la direction
-    private String serviceName; // On ne garde que l'ID de la direction
-    private String directionName; // On ne garde que l'ID de la direction
+    private Long directionId;
+    private Long departementId;
+    private Long serviceId;
+    private String departementName;
+    private String serviceName;
+    private String directionName;
 
     private String role;
     private String username;
