@@ -2,9 +2,7 @@ package com.gestion.materiel.controller;
 
 
 import com.gestion.materiel.Dto.AgentDto;
-import com.gestion.materiel.Dto.DepartementDto;
 import com.gestion.materiel.model.Agent;
-import com.gestion.materiel.model.Departement;
 import com.gestion.materiel.service.AgentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

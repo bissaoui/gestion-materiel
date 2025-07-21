@@ -1,7 +1,11 @@
 package com.gestion.materiel.Dto;
 
 import com.gestion.materiel.model.Agent;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class AgentDto {
     private Long id;
     private String nom;
@@ -42,99 +46,4 @@ public class AgentDto {
         this.username = agent.getUsername();
     }
 
-    public String getCin() {
-        return cin;
-    }
-
-    public void setCin(String cin) {
-        this.cin = cin;
-    }
-
-    public Long getDepartementId() {
-        return departementId;
-    }
-
-    public void setDepartementId(Long departementId) {
-        this.departementId = departementId;
-    }
-
-    public String getDepartementName() {
-        return departementName;
-    }
-
-    public void setDepartementName(String departementName) {
-        this.departementName = departementName;
-    }
-
-    public Long getDirectionId() {
-        return directionId;
-    }
-
-    public void setDirectionId(Long directionId) {
-        this.directionId = directionId;
-    }
-
-    public String getDirectionName() {
-        return directionName;
-    }
-
-    public void setDirectionName(String directionName) {
-        this.directionName = directionName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPoste() {
-        return poste;
-    }
-
-    public void setPoste(String poste) {
-        this.poste = poste;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Long getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(Long serviceId) {
-        this.serviceId = serviceId;
-    }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

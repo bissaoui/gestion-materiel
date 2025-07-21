@@ -38,6 +38,30 @@ POST	/auth/login	Authentification et génération du JWT	Public
 POST	/auth/register	Création d'un nouvel agent	Admin
 GET	/api/agents	Liste des agents	Admin
 GET	/api/materiels	Liste du matériel disponible	Authentifié
-POST	/api/materiels	Ajout d’un matériel	Admin
-PUT	/api/materiels/{id}	Mise à jour d’un matériel	Admin
-DELETE	/api/materiels/{id}	Suppression d’un matériel	Admin
+POST	/api/materiels	Ajout d'un matériel	Admin
+PUT	/api/materiels/{id}	Mise à jour d'un matériel	Admin
+DELETE	/api/materiels/{id}	Suppression d'un matériel	Admin
+
+## How to Run
+
+### Prerequisites
+- Java 17+ installed ([Download here](https://adoptium.net/))
+- JAVA_HOME environment variable set
+
+### On Windows (PowerShell)
+```powershell
+# Set JAVA_HOME if not already set
+$env:JAVA_HOME="C:\Program Files\Java\jdk-17"
+# Run the app
+.\mvnw.cmd spring-boot:run
+```
+
+### On Linux/Mac
+```sh
+export JAVA_HOME=/path/to/your/jdk
+./mvnw spring-boot:run
+```
+
+### Access the app
+- API: http://localhost:8080/
+- Swagger UI: http://localhost:8080/swagger-ui.html
