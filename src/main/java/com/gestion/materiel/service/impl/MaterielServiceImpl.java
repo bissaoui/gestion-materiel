@@ -132,4 +132,33 @@ public class MaterielServiceImpl implements MaterielService {
         dto.setAgentId(null);
         return dto;
     }
+
+    @Override
+    public MaterielDto update(Long id, MaterielDto dto) {
+        Materiel existing = repository.findById(id)
+            .orElseThrow(() -> new NotFoundException("Materiel", id));
+        // Check if numeroSerie is being changed and if the new one already exists
+        if (!existing.getNumeroSerie().equals(dto.getNumeroSerie()) && repository.existsByNumeroSerie(dto.getNumeroSerie())) {
+            throw new DuplicateNumeroSerieException(dto.getNumeroSerie());
+        }
+        TypeMateriel typeMateriel = typeMaterielRepository.findById(dto.getTypeMaterielId())
+                .orElseThrow(() -> new NotFoundException("TypeMateriel", dto.getTypeMaterielId()));
+        Marque marque = marqueRepository.findById(dto.getMarqueId())
+                .orElseThrow(() -> new NotFoundException("Marque", dto.getMarqueId()));
+        Modele modele = modeleRepository.findById(dto.getModeleId())
+                .orElseThrow(() -> new NotFoundException("Modele", dto.getModeleId()));
+        Agent agent = null;
+        if (dto.getAgentId() != null) {
+            agent = agentRepository.findById(dto.getAgentId())
+                .orElseThrow(() -> new NotFoundException("Agent", dto.getAgentId()));
+        }
+        existing.setNumeroSerie(dto.getNumeroSerie());
+        existing.setTypeMateriel(typeMateriel);
+        existing.setMarque(marque);
+        existing.setModele(modele);
+        existing.setAgent(agent);
+        existing = repository.save(existing);
+        dto.setId(existing.getId());
+        return dto;
+    }
 } 

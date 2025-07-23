@@ -33,4 +33,9 @@ public class MaterielController {
     public MaterielDto desaffecter(@PathVariable Long materielId) {
         return materielService.desaffecterMateriel(materielId);
     }
+
+    @PutMapping("/{id}")
+    public MaterielDto update(@PathVariable Long id, @RequestBody MaterielDto dto) {
+        return materielService.update(id, dto);
+    }
 } 

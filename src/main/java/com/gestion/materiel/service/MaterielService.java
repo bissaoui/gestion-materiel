@@ -10,4 +10,5 @@ public interface MaterielService {
     void delete(Long id);
     MaterielDto affecterMaterielAAgent(Long materielId, Long agentId);
     MaterielDto desaffecterMateriel(Long materielId);
+    MaterielDto update(Long id, MaterielDto dto);
 } 
