@@ -274,3 +274,8 @@ export JAVA_HOME=/path/to/your/jdk
 
 ## Contribution & Support
 Pour toute question ou contribution, ouvrez une issue ou une pull request sur le dépôt.
+
+---
+
+## Auteur
+Ce projet a été créé et développé par **YASSINE BISSAOUI**.
