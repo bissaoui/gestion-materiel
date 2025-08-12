@@ -36,6 +36,12 @@ public class DepartementController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/direction/{directionId}")
+    public ResponseEntity<List<Departement>> getDepartementsByDirection(@PathVariable Long directionId) {
+        List<Departement> departements = departementService.getDepartementsByDirectionId(directionId);
+        return ResponseEntity.ok(departements);
+    }
+
 
     @PostMapping
     public ResponseEntity<DepartementDto> createDepartement(@RequestBody Departement departement) {

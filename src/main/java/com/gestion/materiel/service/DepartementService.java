@@ -9,4 +9,6 @@ public interface DepartementService {
     Optional<Departement> getDepartementById(Long id);
     Departement saveDepartement(Departement departement);
     void deleteDepartement(Long id);
+
+    List<Departement> getDepartementsByDirectionId(Long directionId);
 }

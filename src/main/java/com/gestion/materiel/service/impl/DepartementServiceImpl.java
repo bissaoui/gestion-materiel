@@ -34,4 +34,9 @@ public class DepartementServiceImpl implements DepartementService {
     public void deleteDepartement(Long id) {
         departementRepository.deleteById(id);
     }
+
+    @Override
+    public List<Departement> getDepartementsByDirectionId(Long directionId) {
+        return departementRepository.findByDirectionId(directionId);
+    }
 }

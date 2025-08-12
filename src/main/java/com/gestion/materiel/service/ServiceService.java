@@ -9,4 +9,6 @@ public interface ServiceService {
     Optional<Service> getServiceById(Long id);
     Service saveService(Service service);
     void deleteService(Long id);
+
+    List<Service> getServicesByDepartementId(Long departementId);
 }

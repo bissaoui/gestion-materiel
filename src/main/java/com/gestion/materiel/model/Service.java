@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -25,5 +26,6 @@ public class Service {
     private Departement departement;
 
     @OneToMany(mappedBy = "service")
+    @JsonIgnore
     private List<Agent> agents;
 }

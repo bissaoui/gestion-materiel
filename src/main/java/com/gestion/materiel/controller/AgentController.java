@@ -46,19 +46,18 @@ public class AgentController {
     }
 
     @PostMapping
-    public ResponseEntity<Agent> createAgent(@RequestBody Agent agent) {
-        Agent newAgent = agentService.saveAgent(agent);
-        return ResponseEntity.ok(newAgent);
+    public ResponseEntity<AgentDto> createAgent(@RequestBody AgentDto agentDto) {
+        Agent newAgent = agentService.saveAgent(agentDto);
+        return ResponseEntity.ok(new AgentDto(newAgent));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Agent> updateAgent(@PathVariable Long id, @RequestBody Agent agent) {
+    public ResponseEntity<AgentDto> updateAgent(@PathVariable Long id, @RequestBody AgentDto agentDto) {
         if (!agentService.getAgentById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        agent.setId(id);
-        Agent updatedAgent = agentService.saveAgent(agent);
-        return ResponseEntity.ok(updatedAgent);
+        Agent updatedAgent = agentService.updateAgent(id, agentDto);
+        return ResponseEntity.ok(new AgentDto(updatedAgent));
     }
 
     @DeleteMapping("/{id}")

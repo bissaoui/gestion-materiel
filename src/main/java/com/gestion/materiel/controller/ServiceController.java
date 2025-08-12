@@ -34,6 +34,12 @@ public class ServiceController {
         return service.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/departement/{departementId}")
+    public ResponseEntity<List<Service>> getServicesByDepartement(@PathVariable Long departementId) {
+        List<Service> services = serviceService.getServicesByDepartementId(departementId);
+        return ResponseEntity.ok(services);
+    }
+
 
     @PostMapping
     public ResponseEntity<Service> createService(@RequestBody Service service) {

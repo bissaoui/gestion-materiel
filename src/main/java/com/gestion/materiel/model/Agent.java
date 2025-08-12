@@ -1,5 +1,7 @@
 package com.gestion.materiel.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,16 +34,16 @@ public class Agent {
 
     @ManyToOne
     @JoinColumn(name = "direction_id", nullable = true)
+    @JsonIgnore
     private Direction direction;
 
     @ManyToOne
     @JoinColumn(name = "departement_id", nullable = true)
+    @JsonIgnore
     private Departement departement;
 
     @ManyToOne
     @JoinColumn(name = "service_id", nullable = true)
+    @JsonIgnore
     private Service service;
-}
-enum Role {
-    ADMIN, USER
 }

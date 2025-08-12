@@ -34,5 +34,10 @@ public class ServiceServiceImpl implements ServiceService {
         serviceRepository.deleteById(id);
     }
 
+    @Override
+    public List<Service> getServicesByDepartementId(Long departementId) {
+        return serviceRepository.findByDepartementId(departementId);
+    }
+
 
 }

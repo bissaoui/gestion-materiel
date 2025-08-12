@@ -20,6 +20,11 @@ public class AgentDto {
 
     private String role;
     private String username;
+    private String password;
+
+    // Constructeur par défaut pour Jackson
+    public AgentDto() {
+    }
 
     public AgentDto(Agent agent) {
         this.id = agent.getId();
