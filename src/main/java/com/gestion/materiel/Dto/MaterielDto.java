@@ -19,6 +19,8 @@ public class MaterielDto {
     private Long modeleId;
     @JsonProperty("agentId")
     private Long agentId;
+    @JsonProperty("marcherId")
+    private Long marcherId;
     private LocalDateTime dateAffectation;
 
     public LocalDateTime getDateAffectation() { return dateAffectation; }

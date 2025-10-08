@@ -6,11 +6,13 @@ import com.gestion.materiel.model.TypeMateriel;
 import com.gestion.materiel.model.Marque;
 import com.gestion.materiel.model.Modele;
 import com.gestion.materiel.model.Agent;
+import com.gestion.materiel.model.Marcher;
 import com.gestion.materiel.repository.MaterielRepository;
 import com.gestion.materiel.repository.TypeMaterielRepository;
 import com.gestion.materiel.repository.MarqueRepository;
 import com.gestion.materiel.repository.ModeleRepository;
 import com.gestion.materiel.repository.AgentRepository;
+import com.gestion.materiel.repository.MarcherRepository;
 import com.gestion.materiel.service.MaterielService;
 import com.gestion.materiel.exception.DuplicateNumeroSerieException;
 import com.gestion.materiel.exception.NotFoundException;
@@ -32,6 +34,8 @@ public class MaterielServiceImpl implements MaterielService {
     private ModeleRepository modeleRepository;
     @Autowired
     private AgentRepository agentRepository;
+    @Autowired
+    private MarcherRepository marcherRepository;
 
     @Override
     public MaterielDto save(MaterielDto dto) {
@@ -50,12 +54,18 @@ public class MaterielServiceImpl implements MaterielService {
             agent = agentRepository.findById(dto.getAgentId())
                 .orElseThrow(() -> new NotFoundException("Agent", dto.getAgentId()));
         }
+        Marcher marcher = null;
+        if (dto.getMarcherId() != null) {
+            marcher = marcherRepository.findById(dto.getMarcherId())
+                .orElseThrow(() -> new NotFoundException("Marcher", dto.getMarcherId()));
+        }
         Materiel entity = new Materiel();
         entity.setNumeroSerie(dto.getNumeroSerie());
         entity.setTypeMateriel(typeMateriel);
         entity.setMarque(marque);
         entity.setModele(modele);
         entity.setAgent(agent);
+        entity.setMarcher(marcher);
         entity = repository.save(entity);
         dto.setId(entity.getId());
         return dto;
@@ -72,6 +82,7 @@ public class MaterielServiceImpl implements MaterielService {
             dto.setMarqueId(entity.getMarque() != null ? entity.getMarque().getId() : null);
             dto.setModeleId(entity.getModele() != null ? entity.getModele().getId() : null);
             dto.setAgentId(entity.getAgent() != null ? entity.getAgent().getId() : null);
+            dto.setMarcherId(entity.getMarcher() != null ? entity.getMarcher().getId() : null);
             return dto;
         }).collect(Collectors.toList());
     }
@@ -88,6 +99,7 @@ public class MaterielServiceImpl implements MaterielService {
         dto.setMarqueId(entity.getMarque() != null ? entity.getMarque().getId() : null);
         dto.setModeleId(entity.getModele() != null ? entity.getModele().getId() : null);
         dto.setAgentId(entity.getAgent() != null ? entity.getAgent().getId() : null);
+        dto.setMarcherId(entity.getMarcher() != null ? entity.getMarcher().getId() : null);
         return dto;
     }
 
@@ -112,6 +124,7 @@ public class MaterielServiceImpl implements MaterielService {
         dto.setMarqueId(materiel.getMarque() != null ? materiel.getMarque().getId() : null);
         dto.setModeleId(materiel.getModele() != null ? materiel.getModele().getId() : null);
         dto.setAgentId(materiel.getAgent() != null ? materiel.getAgent().getId() : null);
+        dto.setMarcherId(materiel.getMarcher() != null ? materiel.getMarcher().getId() : null);
         return dto;
     }
 
@@ -130,6 +143,7 @@ public class MaterielServiceImpl implements MaterielService {
         dto.setMarqueId(materiel.getMarque() != null ? materiel.getMarque().getId() : null);
         dto.setModeleId(materiel.getModele() != null ? materiel.getModele().getId() : null);
         dto.setAgentId(null);
+        dto.setMarcherId(materiel.getMarcher() != null ? materiel.getMarcher().getId() : null);
         return dto;
     }
 
@@ -152,11 +166,17 @@ public class MaterielServiceImpl implements MaterielService {
             agent = agentRepository.findById(dto.getAgentId())
                 .orElseThrow(() -> new NotFoundException("Agent", dto.getAgentId()));
         }
+        Marcher marcher = null;
+        if (dto.getMarcherId() != null) {
+            marcher = marcherRepository.findById(dto.getMarcherId())
+                .orElseThrow(() -> new NotFoundException("Marcher", dto.getMarcherId()));
+        }
         existing.setNumeroSerie(dto.getNumeroSerie());
         existing.setTypeMateriel(typeMateriel);
         existing.setMarque(marque);
         existing.setModele(modele);
         existing.setAgent(agent);
+        existing.setMarcher(marcher);
         existing = repository.save(existing);
         dto.setId(existing.getId());
         return dto;

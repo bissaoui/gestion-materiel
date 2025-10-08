@@ -34,4 +34,10 @@ public class Materiel {
 
     private LocalDateTime dateAffectation;
 
+    @ManyToOne
+    @JoinColumn(name = "marcher_id")
+    private Marcher marcher;
+
+    public Marcher getMarcher() { return marcher; }
+    public void setMarcher(Marcher marcher) { this.marcher = marcher; }
 }
