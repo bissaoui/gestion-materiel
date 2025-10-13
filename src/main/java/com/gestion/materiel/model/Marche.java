@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Marcher {
+public class Marche {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +15,7 @@ public class Marcher {
 
     private LocalDate date;
 
-    @OneToMany(mappedBy = "marcher")
+    @OneToMany(mappedBy = "marche")
     private Set<Materiel> materiels = new HashSet<>();
 
     public Long getId() { return id; }
@@ -30,6 +30,7 @@ public class Marcher {
     public Set<Materiel> getMateriels() { return materiels; }
     public void setMateriels(Set<Materiel> materiels) { this.materiels = materiels; }
 }
+
 
 
 

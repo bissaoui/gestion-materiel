@@ -25,8 +25,11 @@ public class MaterielController {
     public void delete(@PathVariable Long id) { materielService.delete(id); }
 
     @PutMapping("/{materielId}/affecter/{agentId}")
-    public MaterielDto affecter(@PathVariable Long materielId, @PathVariable Long agentId) {
-        return materielService.affecterMaterielAAgent(materielId, agentId);
+    public MaterielDto affecter(
+            @PathVariable Long materielId,
+            @PathVariable Long agentId,
+            @RequestBody MaterielDto dto) {
+        return materielService.affecterMaterielAAgent(materielId, agentId, dto.getDateAffectation());
     }
 
     @PutMapping("/{materielId}/desaffecter")

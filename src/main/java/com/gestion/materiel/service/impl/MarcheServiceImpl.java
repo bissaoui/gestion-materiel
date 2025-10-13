@@ -1,11 +1,11 @@
 package com.gestion.materiel.service.impl;
 
-import com.gestion.materiel.Dto.MarcherDto;
-import com.gestion.materiel.model.Marcher;
+import com.gestion.materiel.Dto.MarcheDto;
+import com.gestion.materiel.model.Marche;
 import com.gestion.materiel.model.Materiel;
-import com.gestion.materiel.repository.MarcherRepository;
+import com.gestion.materiel.repository.MarcheRepository;
 import com.gestion.materiel.repository.MaterielRepository;
-import com.gestion.materiel.service.MarcherService;
+import com.gestion.materiel.service.MarcheService;
 import com.gestion.materiel.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +15,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class MarcherServiceImpl implements MarcherService {
+public class MarcheServiceImpl implements MarcheService {
 
     @Autowired
-    private MarcherRepository marcherRepository;
+    private MarcheRepository marcherRepository;
 
     @Autowired
     private MaterielRepository materielRepository;
 
     @Override
-    public MarcherDto save(MarcherDto dto) {
-        Marcher entity = new Marcher();
+    public MarcheDto save(MarcheDto dto) {
+        Marche entity = new Marche();
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
         if (dto.getMaterielIds() != null && !dto.getMaterielIds().isEmpty()) {
@@ -35,7 +35,7 @@ public class MarcherServiceImpl implements MarcherService {
             entity.setMateriels(materiels);
             // maintain owning side
             for (Materiel m : materiels) {
-                m.setMarcher(entity);
+                m.setMarche(entity);
             }
         }
         entity = marcherRepository.save(entity);
@@ -44,8 +44,8 @@ public class MarcherServiceImpl implements MarcherService {
     }
 
     @Override
-    public MarcherDto update(Long id, MarcherDto dto) {
-        Marcher entity = marcherRepository.findById(id).orElseThrow(() -> new NotFoundException("Marcher", id));
+    public MarcheDto update(Long id, MarcheDto dto) {
+        Marche entity = marcherRepository.findById(id).orElseThrow(() -> new NotFoundException("Marche", id));
         entity.setName(dto.getName());
         entity.setDate(dto.getDate());
         if (dto.getMaterielIds() != null) {
@@ -54,7 +54,7 @@ public class MarcherServiceImpl implements MarcherService {
                 .collect(Collectors.toSet());
             entity.setMateriels(materiels);
             for (Materiel m : materiels) {
-                m.setMarcher(entity);
+                m.setMarche(entity);
             }
         }
         entity = marcherRepository.save(entity);
@@ -62,13 +62,13 @@ public class MarcherServiceImpl implements MarcherService {
     }
 
     @Override
-    public List<MarcherDto> findAll() {
+    public List<MarcheDto> findAll() {
         return marcherRepository.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public MarcherDto findById(Long id) {
-        Marcher entity = marcherRepository.findById(id).orElseThrow(() -> new NotFoundException("Marcher", id));
+    public MarcheDto findById(Long id) {
+        Marche entity = marcherRepository.findById(id).orElseThrow(() -> new NotFoundException("Marche", id));
         return toDto(entity);
     }
 
@@ -77,8 +77,8 @@ public class MarcherServiceImpl implements MarcherService {
         marcherRepository.deleteById(id);
     }
 
-    private MarcherDto toDto(Marcher entity) {
-        MarcherDto dto = new MarcherDto();
+    private MarcheDto toDto(Marche entity) {
+        MarcheDto dto = new MarcheDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDate(entity.getDate());
@@ -88,5 +88,7 @@ public class MarcherServiceImpl implements MarcherService {
         return dto;
     }
 }
+
+
 
 

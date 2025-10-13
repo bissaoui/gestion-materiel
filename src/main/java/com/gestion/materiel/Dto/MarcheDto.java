@@ -7,12 +7,13 @@ import java.util.Set;
 
 @Setter
 @Getter
-public class MarcherDto {
+public class MarcheDto {
     private Long id;
     private String name;
     private LocalDate date;
     private Set<Long> materielIds;
 }
+
 
 
 
