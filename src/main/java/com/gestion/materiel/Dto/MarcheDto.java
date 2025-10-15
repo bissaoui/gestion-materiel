@@ -11,8 +11,15 @@ public class MarcheDto {
     private Long id;
     private String name;
     private LocalDate date;
+    private LocalDate dateOrdreService;
+    private Integer delaiExecution;
+    private LocalDate dateReceptionProvisoire;
+    private LocalDate dateReceptionDefinitive;
+    private String typeMarche;
+    private Long prestataireId;
     private Set<Long> materielIds;
 }
+
 
 
 
