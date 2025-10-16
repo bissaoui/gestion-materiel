@@ -38,6 +38,7 @@ public class MarcheServiceImpl implements MarcheService {
         entity.setDelaiExecution(dto.getDelaiExecution());
         entity.setDateReceptionProvisoire(dto.getDateReceptionProvisoire());
         entity.setDateReceptionDefinitive(dto.getDateReceptionDefinitive());
+        entity.setHasRetenueGarantie(dto.getHasRetenueGarantie());
         
         if (dto.getTypeMarche() != null) {
             entity.setTypeMarche(TypeMarche.valueOf(dto.getTypeMarche()));
@@ -73,6 +74,7 @@ public class MarcheServiceImpl implements MarcheService {
         entity.setDelaiExecution(dto.getDelaiExecution());
         entity.setDateReceptionProvisoire(dto.getDateReceptionProvisoire());
         entity.setDateReceptionDefinitive(dto.getDateReceptionDefinitive());
+        entity.setHasRetenueGarantie(dto.getHasRetenueGarantie());
         
         if (dto.getTypeMarche() != null) {
             entity.setTypeMarche(TypeMarche.valueOf(dto.getTypeMarche()));
@@ -122,6 +124,7 @@ public class MarcheServiceImpl implements MarcheService {
         dto.setDelaiExecution(entity.getDelaiExecution());
         dto.setDateReceptionProvisoire(entity.getDateReceptionProvisoire());
         dto.setDateReceptionDefinitive(entity.getDateReceptionDefinitive());
+        dto.setHasRetenueGarantie(entity.getHasRetenueGarantie());
         
         if (entity.getTypeMarche() != null) {
             dto.setTypeMarche(entity.getTypeMarche().name());

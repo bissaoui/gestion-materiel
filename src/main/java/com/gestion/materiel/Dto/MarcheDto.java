@@ -17,6 +17,7 @@ public class MarcheDto {
     private LocalDate dateReceptionDefinitive;
     private String typeMarche;
     private Long prestataireId;
+    private Boolean hasRetenueGarantie;
     private Set<Long> materielIds;
 }
 

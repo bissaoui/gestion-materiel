@@ -35,6 +35,9 @@ public class Marche {
     @JoinColumn(name = "prestataire_id")
     private Prestataire prestataire;
 
+    @Column(name = "has_retenue_garantie")
+    private Boolean hasRetenueGarantie;
+
     @OneToMany(mappedBy = "marche")
     private Set<Materiel> materiels = new HashSet<>();
 
@@ -67,6 +70,9 @@ public class Marche {
 
     public Prestataire getPrestataire() { return prestataire; }
     public void setPrestataire(Prestataire prestataire) { this.prestataire = prestataire; }
+
+    public Boolean getHasRetenueGarantie() { return hasRetenueGarantie; }
+    public void setHasRetenueGarantie(Boolean hasRetenueGarantie) { this.hasRetenueGarantie = hasRetenueGarantie; }
 }
 
 
