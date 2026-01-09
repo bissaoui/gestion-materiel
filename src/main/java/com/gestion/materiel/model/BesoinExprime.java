@@ -31,11 +31,23 @@ public class BesoinExprime {
     @Column(name = "date_besoin", nullable = false)
     private LocalDate dateBesoin;
 
-    @Column(name = "raison", nullable = false, length = 1000)
-    private String raison;
+    @Column(name = "motif", nullable = false, length = 1000)
+    private String motif;
 
     @Column(name = "observation", length = 2000)
     private String observation;
+
+    @Column(name = "date_affectation_ancien")
+    private LocalDate dateAffectationAncien;
+
+    @Column(name = "numero_serie_ancien", length = 100)
+    private String numeroSerieAncien;
+
+    @Column(name = "marque_ancien", length = 100)
+    private String marqueAncien;
+
+    @Column(name = "modele_ancien", length = 100)
+    private String modeleAncien;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut", nullable = false, length = 20)

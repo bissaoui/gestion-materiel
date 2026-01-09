@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Agent agent) {
         try {
-            String token = authService.login(agent.getUsername(), agent.getPassword());
+            String token = authService.login(agent.getCIN(), agent.getPassword());
             return ResponseEntity.ok(token);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());

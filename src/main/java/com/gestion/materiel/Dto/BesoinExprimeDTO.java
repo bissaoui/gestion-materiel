@@ -10,12 +10,15 @@ public class BesoinExprimeDTO {
     private Long id;
     private Long agentId;
     private String agentNom;
-    private String agentUsername;
     private Long typeMaterielId;
     private String typeMaterielNom;
     private LocalDate dateBesoin;
-    private String raison;
+    private String motif;
     private String observation;
+    private LocalDate dateAffectationAncien;
+    private String numeroSerieAncien;
+    private String marqueAncien;
+    private String modeleAncien;
     private StatutBesoin statut;
     private LocalDateTime dateCreation;
     private LocalDateTime dateValidation;
@@ -35,12 +38,15 @@ public class BesoinExprimeDTO {
         this.id = besoin.getId();
         this.agentId = besoin.getAgent() != null ? besoin.getAgent().getId() : null;
         this.agentNom = besoin.getAgent() != null ? besoin.getAgent().getNom() : null;
-        this.agentUsername = besoin.getAgent() != null ? besoin.getAgent().getUsername() : null;
         this.typeMaterielId = besoin.getTypeMateriel() != null ? besoin.getTypeMateriel().getId() : null;
         this.typeMaterielNom = besoin.getTypeMateriel() != null ? besoin.getTypeMateriel().getNom() : null;
         this.dateBesoin = besoin.getDateBesoin();
-        this.raison = besoin.getRaison();
+        this.motif = besoin.getMotif();
         this.observation = besoin.getObservation();
+        this.dateAffectationAncien = besoin.getDateAffectationAncien();
+        this.numeroSerieAncien = besoin.getNumeroSerieAncien();
+        this.marqueAncien = besoin.getMarqueAncien();
+        this.modeleAncien = besoin.getModeleAncien();
         this.statut = besoin.getStatut();
         this.dateCreation = besoin.getDateCreation();
         this.dateValidation = besoin.getDateValidation();
@@ -79,14 +85,6 @@ public class BesoinExprimeDTO {
         this.agentNom = agentNom;
     }
 
-    public String getAgentUsername() {
-        return agentUsername;
-    }
-
-    public void setAgentUsername(String agentUsername) {
-        this.agentUsername = agentUsername;
-    }
-
     public Long getTypeMaterielId() {
         return typeMaterielId;
     }
@@ -111,12 +109,12 @@ public class BesoinExprimeDTO {
         this.dateBesoin = dateBesoin;
     }
 
-    public String getRaison() {
-        return raison;
+    public String getMotif() {
+        return motif;
     }
 
-    public void setRaison(String raison) {
-        this.raison = raison;
+    public void setMotif(String motif) {
+        this.motif = motif;
     }
 
     public String getObservation() {
@@ -213,6 +211,38 @@ public class BesoinExprimeDTO {
 
     public void setDecideurNom(String decideurNom) {
         this.decideurNom = decideurNom;
+    }
+
+    public LocalDate getDateAffectationAncien() {
+        return dateAffectationAncien;
+    }
+
+    public void setDateAffectationAncien(LocalDate dateAffectationAncien) {
+        this.dateAffectationAncien = dateAffectationAncien;
+    }
+
+    public String getNumeroSerieAncien() {
+        return numeroSerieAncien;
+    }
+
+    public void setNumeroSerieAncien(String numeroSerieAncien) {
+        this.numeroSerieAncien = numeroSerieAncien;
+    }
+
+    public String getMarqueAncien() {
+        return marqueAncien;
+    }
+
+    public void setMarqueAncien(String marqueAncien) {
+        this.marqueAncien = marqueAncien;
+    }
+
+    public String getModeleAncien() {
+        return modeleAncien;
+    }
+
+    public void setModeleAncien(String modeleAncien) {
+        this.modeleAncien = modeleAncien;
     }
 }
 

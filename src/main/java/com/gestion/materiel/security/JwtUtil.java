@@ -13,9 +13,9 @@ public class JwtUtil {
     private static final String SECRET_KEY = "yASSINEbISSAOUI199711231225Recardo@S10+";
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());  // Utiliser la clé correctement
 
-    public String generateToken(String cin, String role, String username) {
+    public String generateToken(String cin, String role) {
         return Jwts.builder()
-                .subject(username)  // "sub" contient le username
+                .subject(cin)  // "sub" contient le CIN
                 .claim("role", role) // Ajout du rôle
                 .claim("cin", cin)   // Ajout du CIN
                 .issuedAt(new Date())
@@ -24,7 +24,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    public String extractUsername(String token) {
+    public String extractCin(String token) {
         return Jwts.parser()
                 .setSigningKey(key)
                 .build()

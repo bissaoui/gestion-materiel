@@ -79,9 +79,9 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public BesoinExprimeDTO createBesoin(BesoinExprimeRequest request, String currentUsername) {
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+    public BesoinExprimeDTO createBesoin(BesoinExprimeRequest request, String currentCin) {
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         BesoinExprime besoin = mapper.toEntity(request);
         besoin.setAgent(currentAgent);
@@ -93,12 +93,12 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public BesoinExprimeDTO updateBesoin(Long id, BesoinExprimeRequest request, String currentUsername) {
+    public BesoinExprimeDTO updateBesoin(Long id, BesoinExprimeRequest request, String currentCin) {
         BesoinExprime besoin = besoinExprimeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("BesoinExprime", id));
         
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         // Vérifier que l'agent est le créateur et que le statut est CRÉÉ
         if (!besoin.getAgent().getId().equals(currentAgent.getId())) {
@@ -116,12 +116,12 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public BesoinExprimeDTO validerBesoin(Long id, String currentUsername) {
+    public BesoinExprimeDTO validerBesoin(Long id, String currentCin) {
         BesoinExprime besoin = besoinExprimeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("BesoinExprime", id));
         
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         // Vérifier le statut
         if (besoin.getStatut() != StatutBesoin.CRÉÉ) {
@@ -143,12 +143,12 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public BesoinExprimeDTO viserBesoin(Long id, String currentUsername) {
+    public BesoinExprimeDTO viserBesoin(Long id, String currentCin) {
         BesoinExprime besoin = besoinExprimeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("BesoinExprime", id));
         
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         // Vérifier le statut
         if (besoin.getStatut() != StatutBesoin.VALIDATION) {
@@ -173,12 +173,12 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public BesoinExprimeDTO accepterBesoin(Long id, String currentUsername) {
+    public BesoinExprimeDTO accepterBesoin(Long id, String currentCin) {
         BesoinExprime besoin = besoinExprimeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("BesoinExprime", id));
         
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         // Vérifier le statut
         if (besoin.getStatut() != StatutBesoin.VISA) {
@@ -200,12 +200,12 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public BesoinExprimeDTO refuserBesoin(Long id, String motif, String currentUsername) {
+    public BesoinExprimeDTO refuserBesoin(Long id, String motif, String currentCin) {
         BesoinExprime besoin = besoinExprimeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("BesoinExprime", id));
         
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         // Vérifier le statut
         if (besoin.getStatut() != StatutBesoin.VISA) {
@@ -232,12 +232,12 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public BesoinExprimeDTO changeStatut(Long id, StatutBesoin nouveauStatut, String currentUsername) {
+    public BesoinExprimeDTO changeStatut(Long id, StatutBesoin nouveauStatut, String currentCin) {
         BesoinExprime besoin = besoinExprimeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("BesoinExprime", id));
         
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         // Validation des transitions de statut
         validateStatutTransition(besoin.getStatut(), nouveauStatut, currentAgent);
@@ -271,12 +271,12 @@ public class BesoinExprimeServiceImpl implements BesoinExprimeService {
     
     @Override
     @Transactional
-    public void deleteBesoin(Long id, String currentUsername) {
+    public void deleteBesoin(Long id, String currentCin) {
         BesoinExprime besoin = besoinExprimeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("BesoinExprime", id));
         
-        Agent currentAgent = agentRepository.findAgentByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le username: " + currentUsername));
+        Agent currentAgent = agentRepository.findAgentByCIN(currentCin)
+                .orElseThrow(() -> new RuntimeException("Agent non trouvé avec le CIN: " + currentCin));
         
         // Vérifier que l'agent est le créateur et que le statut est CRÉÉ
         if (!besoin.getAgent().getId().equals(currentAgent.getId())) {

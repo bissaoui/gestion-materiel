@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MaterielRepository extends JpaRepository<Materiel, Long> {
     boolean existsByNumeroSerie(String numeroSerie);
+    long countByAgentId(Long agentId);
 } 

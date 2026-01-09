@@ -17,17 +17,17 @@ public interface BesoinExprimeService {
     Page<BesoinExprimeDTO> getBesoinsAViser(Pageable pageable);
     
     // Création et modification
-    BesoinExprimeDTO createBesoin(BesoinExprimeRequest request, String currentUsername);
-    BesoinExprimeDTO updateBesoin(Long id, BesoinExprimeRequest request, String currentUsername);
+    BesoinExprimeDTO createBesoin(BesoinExprimeRequest request, String currentCin);
+    BesoinExprimeDTO updateBesoin(Long id, BesoinExprimeRequest request, String currentCin);
     
     // Workflow
-    BesoinExprimeDTO validerBesoin(Long id, String currentUsername);
-    BesoinExprimeDTO viserBesoin(Long id, String currentUsername);
-    BesoinExprimeDTO accepterBesoin(Long id, String currentUsername);
-    BesoinExprimeDTO refuserBesoin(Long id, String motif, String currentUsername);
-    BesoinExprimeDTO changeStatut(Long id, StatutBesoin nouveauStatut, String currentUsername);
+    BesoinExprimeDTO validerBesoin(Long id, String currentCin);
+    BesoinExprimeDTO viserBesoin(Long id, String currentCin);
+    BesoinExprimeDTO accepterBesoin(Long id, String currentCin);
+    BesoinExprimeDTO refuserBesoin(Long id, String motif, String currentCin);
+    BesoinExprimeDTO changeStatut(Long id, StatutBesoin nouveauStatut, String currentCin);
     
     // Suppression
-    void deleteBesoin(Long id, String currentUsername);
+    void deleteBesoin(Long id, String currentCin);
 }
 

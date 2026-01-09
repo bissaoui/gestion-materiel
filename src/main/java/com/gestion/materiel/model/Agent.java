@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -18,14 +20,27 @@ public class Agent {
     @Column(unique = true, nullable = false)
     private String CIN;
 
-    @Column(unique = true, nullable = false)
-    private String username;
-
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     private String nom;
+
+    @Column(nullable = false)
+    private String prenom;
+
+    @Column(unique = true, nullable = true)
+    private String email;
+
+    @Column(unique = true, nullable = true)
+    private String matricule;
+
+    @Column(name = "date_naissance")
+    private LocalDate dateNaissance;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 10)
+    private Sexe sexe;
 
     private String poste;
 

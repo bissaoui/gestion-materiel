@@ -69,9 +69,9 @@ public class DataInitializer {
             // === Agents ===
             Agent admin = new Agent();
             admin.setCIN("AA123456");
-            admin.setUsername("admin");
             admin.setPassword(passwordEncoder.encode("admin"));
             admin.setNom("Administrateur");
+            admin.setPrenom("Admin");
             admin.setPoste("Chef de service");
             admin.setRole(Role.ADMIN);
             admin.setDirection(dir1);
@@ -81,9 +81,9 @@ public class DataInitializer {
 
             Agent user = new Agent();
             user.setCIN("BB654321");
-            user.setUsername("yassine");
             user.setPassword(passwordEncoder.encode("yassine123"));
-            user.setNom("Yassine Bissaoui");
+            user.setNom("Bissaoui");
+            user.setPrenom("Yassine");
             user.setPoste("Développeur");
             user.setRole(Role.USER);
             user.setDirection(dir1);

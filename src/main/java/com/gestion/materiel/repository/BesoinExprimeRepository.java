@@ -50,5 +50,11 @@ public interface BesoinExprimeRepository extends JpaRepository<BesoinExprime, Lo
     // Find besoins à valider (statut CRÉÉ) for a specific service
     @Query("SELECT b FROM BesoinExprime b WHERE b.agent.service.id = :serviceId AND b.statut = 'CRÉÉ'")
     Page<BesoinExprime> findBesoinsAValiderByService(@Param("serviceId") Long serviceId, Pageable pageable);
+    
+    // Count methods for checking agent usage before deletion
+    long countByAgentId(Long agentId);
+    long countByValidateurId(Long validateurId);
+    long countByViseurId(Long viseurId);
+    long countByDecideurId(Long decideurId);
 }
 

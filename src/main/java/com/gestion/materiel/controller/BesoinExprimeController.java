@@ -28,9 +28,9 @@ public class BesoinExprimeController {
     }
     
     /**
-     * Récupère le nom d'utilisateur actuel depuis le contexte de sécurité
+     * Récupère le CIN de l'utilisateur actuel depuis le contexte de sécurité
      */
-    private String getCurrentUsername() {
+    private String getCurrentCin() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             return authentication.getName();
@@ -105,8 +105,8 @@ public class BesoinExprimeController {
     @PostMapping
     public ResponseEntity<?> createBesoin(@RequestBody BesoinExprimeRequest request) {
         try {
-            String currentUsername = getCurrentUsername();
-            BesoinExprimeDTO besoin = besoinExprimeService.createBesoin(request, currentUsername);
+            String currentCin = getCurrentCin();
+            BesoinExprimeDTO besoin = besoinExprimeService.createBesoin(request, currentCin);
             return ResponseEntity.ok(besoin);
         } catch (RuntimeException e) {
             Map<String, String> errorResponse = new HashMap<>();
@@ -129,8 +129,8 @@ public class BesoinExprimeController {
             @PathVariable Long id,
             @RequestBody BesoinExprimeRequest request) {
         try {
-            String currentUsername = getCurrentUsername();
-            BesoinExprimeDTO besoin = besoinExprimeService.updateBesoin(id, request, currentUsername);
+            String currentCin = getCurrentCin();
+            BesoinExprimeDTO besoin = besoinExprimeService.updateBesoin(id, request, currentCin);
             return ResponseEntity.ok(besoin);
         } catch (RuntimeException e) {
             Map<String, String> errorResponse = new HashMap<>();
@@ -150,8 +150,8 @@ public class BesoinExprimeController {
             @PathVariable Long id,
             @RequestParam StatutBesoin nouveauStatut) {
         try {
-            String currentUsername = getCurrentUsername();
-            BesoinExprimeDTO besoin = besoinExprimeService.changeStatut(id, nouveauStatut, currentUsername);
+            String currentCin = getCurrentCin();
+            BesoinExprimeDTO besoin = besoinExprimeService.changeStatut(id, nouveauStatut, currentCin);
             return ResponseEntity.ok(besoin);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
@@ -166,8 +166,8 @@ public class BesoinExprimeController {
     @PutMapping("/{id}/valider")
     public ResponseEntity<?> validerBesoin(@PathVariable Long id) {
         try {
-            String currentUsername = getCurrentUsername();
-            BesoinExprimeDTO besoin = besoinExprimeService.validerBesoin(id, currentUsername);
+            String currentCin = getCurrentCin();
+            BesoinExprimeDTO besoin = besoinExprimeService.validerBesoin(id, currentCin);
             return ResponseEntity.ok(besoin);
         } catch (RuntimeException e) {
             Map<String, String> errorResponse = new HashMap<>();
@@ -185,8 +185,8 @@ public class BesoinExprimeController {
     @PutMapping("/{id}/viser")
     public ResponseEntity<?> viserBesoin(@PathVariable Long id) {
         try {
-            String currentUsername = getCurrentUsername();
-            BesoinExprimeDTO besoin = besoinExprimeService.viserBesoin(id, currentUsername);
+            String currentCin = getCurrentCin();
+            BesoinExprimeDTO besoin = besoinExprimeService.viserBesoin(id, currentCin);
             return ResponseEntity.ok(besoin);
         } catch (RuntimeException e) {
             // Retourner le message d'erreur dans le body pour faciliter le débogage
@@ -205,8 +205,8 @@ public class BesoinExprimeController {
     @PutMapping("/{id}/accepter")
     public ResponseEntity<?> accepterBesoin(@PathVariable Long id) {
         try {
-            String currentUsername = getCurrentUsername();
-            BesoinExprimeDTO besoin = besoinExprimeService.accepterBesoin(id, currentUsername);
+            String currentCin = getCurrentCin();
+            BesoinExprimeDTO besoin = besoinExprimeService.accepterBesoin(id, currentCin);
             return ResponseEntity.ok(besoin);
         } catch (RuntimeException e) {
             Map<String, String> errorResponse = new HashMap<>();
@@ -226,8 +226,8 @@ public class BesoinExprimeController {
             @PathVariable Long id,
             @RequestParam(required = false) String motif) {
         try {
-            String currentUsername = getCurrentUsername();
-            BesoinExprimeDTO besoin = besoinExprimeService.refuserBesoin(id, motif, currentUsername);
+            String currentCin = getCurrentCin();
+            BesoinExprimeDTO besoin = besoinExprimeService.refuserBesoin(id, motif, currentCin);
             return ResponseEntity.ok(besoin);
         } catch (RuntimeException e) {
             Map<String, String> errorResponse = new HashMap<>();
@@ -245,8 +245,8 @@ public class BesoinExprimeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBesoin(@PathVariable Long id) {
         try {
-            String currentUsername = getCurrentUsername();
-            besoinExprimeService.deleteBesoin(id, currentUsername);
+            String currentCin = getCurrentCin();
+            besoinExprimeService.deleteBesoin(id, currentCin);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             Map<String, String> errorResponse = new HashMap<>();

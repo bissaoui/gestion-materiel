@@ -36,22 +36,22 @@ public class JwtFilter extends OncePerRequestFilter {
         final String authorizationHeader = request.getHeader("Authorization");
 
         String token = null;
-        String username = null;
+        String cin = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);
             try {
-                username = jwtUtil.extractUsername(token);
-                System.out.println("username is " + username);
+                cin = jwtUtil.extractCin(token);
+                System.out.println("CIN is " + cin);
             } catch (ExpiredJwtException | SignatureException e) {
                 System.out.println("Invalid JWT Token: " + e.getMessage());
             }
         }
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = agentServiceImpl.loadUserByUsername(username);
+        if (cin != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = agentServiceImpl.loadUserByUsername(cin);
 
-            if (jwtUtil.validateToken(token) && username.equals(userDetails.getUsername())) {
+            if (jwtUtil.validateToken(token) && cin.equals(userDetails.getUsername())) {
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

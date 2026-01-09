@@ -27,8 +27,8 @@ public class DemandeDto {
 
     public DemandeDto(Demande demande) {
         AgentID = demande.getAgent().getId();
-        agentNom = demande.getAgent().getUsername();
-        agentPrenom = demande.getAgent().getNom();
+        agentNom = demande.getAgent().getNom();
+        agentPrenom = demande.getAgent().getPrenom();
         this.date = demande.getDate();
         this.id = demande.getId();
         this.validation = demande.isValidation();

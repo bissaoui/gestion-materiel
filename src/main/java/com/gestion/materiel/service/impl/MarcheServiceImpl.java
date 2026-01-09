@@ -9,9 +9,11 @@ import com.gestion.materiel.repository.MarcheRepository;
 import com.gestion.materiel.repository.MaterielRepository;
 import com.gestion.materiel.repository.PrestataireRepository;
 import com.gestion.materiel.service.MarcheService;
+import com.gestion.materiel.service.MarcheSpecificationService;
 import com.gestion.materiel.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -29,7 +31,11 @@ public class MarcheServiceImpl implements MarcheService {
     @Autowired
     private PrestataireRepository prestataireRepository;
 
+    @Autowired
+    private MarcheSpecificationService marcheSpecificationService;
+
     @Override
+    @Transactional
     public MarcheDto save(MarcheDto dto) {
         Marche entity = new Marche();
         entity.setName(dto.getName());
@@ -62,10 +68,17 @@ public class MarcheServiceImpl implements MarcheService {
         }
         entity = marcherRepository.save(entity);
         dto.setId(entity.getId());
+        
+        // Sauvegarder les spécifications si présentes
+        if (dto.getSpecifications() != null && !dto.getSpecifications().isEmpty()) {
+            marcheSpecificationService.saveSpecifications(entity.getId(), dto.getSpecifications());
+        }
+        
         return dto;
     }
 
     @Override
+    @Transactional
     public MarcheDto update(Long id, MarcheDto dto) {
         Marche entity = marcherRepository.findById(id).orElseThrow(() -> new NotFoundException("Marche", id));
         entity.setName(dto.getName());
@@ -96,6 +109,12 @@ public class MarcheServiceImpl implements MarcheService {
             }
         }
         entity = marcherRepository.save(entity);
+        
+        // Mettre à jour les spécifications si présentes
+        if (dto.getSpecifications() != null) {
+            marcheSpecificationService.updateSpecifications(entity.getId(), dto.getSpecifications());
+        }
+        
         return toDto(entity);
     }
 
@@ -111,7 +130,10 @@ public class MarcheServiceImpl implements MarcheService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
+        // Supprimer les spécifications associées
+        marcheSpecificationService.deleteSpecificationsByMarcheId(id);
         marcherRepository.deleteById(id);
     }
 

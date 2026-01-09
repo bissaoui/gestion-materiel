@@ -12,7 +12,6 @@ public interface AgentService {
     void deleteAgent(Long id);
 
     Optional<Agent> findAgentByCIN(String cin);
-    Optional<Agent> findAgentByUsername(String username);
 
     Agent updateAgent(Long id, AgentDto agentDto);
 

@@ -3,6 +3,7 @@ package com.gestion.materiel.Dto;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -19,6 +20,7 @@ public class MarcheDto {
     private Long prestataireId;
     private Boolean hasRetenueGarantie;
     private Set<Long> materielIds;
+    private List<MarcheSpecificationRequest> specifications;
 }
 
 

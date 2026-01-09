@@ -42,8 +42,12 @@ public class BesoinExprimeMapper {
         
         BesoinExprime besoin = new BesoinExprime();
         besoin.setDateBesoin(request.getDateBesoin());
-        besoin.setRaison(request.getRaison());
+        besoin.setMotif(request.getMotif());
         besoin.setObservation(request.getObservation());
+        besoin.setDateAffectationAncien(request.getDateAffectationAncien());
+        besoin.setNumeroSerieAncien(request.getNumeroSerieAncien());
+        besoin.setMarqueAncien(request.getMarqueAncien());
+        besoin.setModeleAncien(request.getModeleAncien());
         besoin.setStatut(com.gestion.materiel.model.StatutBesoin.CRÉÉ);
         
         // Set agent
@@ -70,8 +74,12 @@ public class BesoinExprimeMapper {
         }
         
         besoin.setDateBesoin(request.getDateBesoin());
-        besoin.setRaison(request.getRaison());
+        besoin.setMotif(request.getMotif());
         besoin.setObservation(request.getObservation());
+        besoin.setDateAffectationAncien(request.getDateAffectationAncien());
+        besoin.setNumeroSerieAncien(request.getNumeroSerieAncien());
+        besoin.setMarqueAncien(request.getMarqueAncien());
+        besoin.setModeleAncien(request.getModeleAncien());
         
         // Update type materiel if provided
         if (request.getTypeMaterielId() != null) {
