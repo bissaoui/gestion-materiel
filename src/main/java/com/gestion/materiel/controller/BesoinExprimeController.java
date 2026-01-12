@@ -4,6 +4,7 @@ import com.gestion.materiel.Dto.BesoinExprimeDTO;
 import com.gestion.materiel.Dto.BesoinExprimeRequest;
 import com.gestion.materiel.model.StatutBesoin;
 import com.gestion.materiel.service.BesoinExprimeService;
+import com.gestion.materiel.service.impl.BesoinExprimeServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,9 +83,22 @@ public class BesoinExprimeController {
     public ResponseEntity<Page<BesoinExprimeDTO>> getBesoinsAValider(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<BesoinExprimeDTO> besoins = besoinExprimeService.getBesoinsAValider(pageable);
-        return ResponseEntity.ok(besoins);
+        try {
+            String currentCin = getCurrentCin();
+            Pageable pageable = PageRequest.of(page, size);
+            // Utiliser la méthode qui filtre par hiérarchie
+            if (besoinExprimeService instanceof BesoinExprimeServiceImpl) {
+                Page<BesoinExprimeDTO> besoins = ((BesoinExprimeServiceImpl) besoinExprimeService)
+                        .getBesoinsAValiderByHierarchy(currentCin, pageable);
+                return ResponseEntity.ok(besoins);
+            } else {
+                // Fallback si le cast échoue
+                Page<BesoinExprimeDTO> besoins = besoinExprimeService.getBesoinsAValider(pageable);
+                return ResponseEntity.ok(besoins);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
     
     /**
